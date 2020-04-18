@@ -15,7 +15,6 @@ ip route add 192.168.2.224/27 dev eth2 realm 7
 crearCola(){
 #echo "Esto está COMPLICATED"
 tc qdisc add dev $1 root handle 1: prio bands 8
-tc qdisc add dev $1 root handle 1: prio bands 8
 # tc qdisc add dev $1 parent 1:1 handle 1:10 tbf rate 3mbit ceil 6mbit burst 15k
 tc qdisc add dev $1 parent 1:1 handle 10: tbf rate 20kbit latency 50ms burst 1540
 tc qdisc add dev $1 parent 1:2 handle 20: tbf rate 40kbit latency 50ms burst 1540
@@ -27,11 +26,21 @@ tc qdisc add dev $1 parent 1:7 handle 70: tbf rate 300kbit latency 50ms burst 15
 tc qdisc add dev $1 parent 1:8 handle 80: tbf rate 500Mbit latency 50ms burst 1540 #router
 }
 
+filter(){
+tc filter add dev $1 parent 1:0 route from 1 flowid 1:1
+tc filter add dev $1 parent 1:0 route from 2 flowid 1:2
+tc filter add dev $1 parent 1:0 route from 3 flowid 1:3
+tc filter add dev $1 parent 1:0 route from 4 flowid 1:4
+tc filter add dev $1 parent 1:0 route from 5 flowid 1:5
+tc filter add dev $1 parent 1:0 route from 6 flowid 1:6
+tc filter add dev $1 parent 1:0 route from 7 flowid 1:7
+}
 
 marcar
 crearCola eth0
 crearCola eth1
-
+filter eth0
+filter eth1
 
 
 #Para probar, se puede ejecutar en cada consola.
