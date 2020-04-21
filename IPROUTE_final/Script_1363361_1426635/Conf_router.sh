@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #eth0
 ip route add 192.168.0.0/24 dev eth0 src 192.168.0.2 table TABLE1
 ip route add default via 192.168.0.1 table TABLE1

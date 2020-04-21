@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #pugui especificar si es vol permetre ACCEPT
 #o tallar l’accés a internet DROP 
@@ -18,4 +17,3 @@ else
 	echo "ERROR DE SINTAXIS"
 	echo "Sintaxis: ./modificaAccesPerSubxarxa.sh [SUBNET] [DROP/ACCEPT]"
 fi
-
